@@ -22,10 +22,7 @@ SHEBANG_FILES=	bin/data-prepper
 
 NO_BUILD=	yes
 SUB_FILES=      data-prepper pkg-message
-SUB_LIST=       SEARCHUSER=${SEARCHUSER} \
-                SEARCHGROUP=${SEARCHGROUP} \
-                JAVA_HOME=${JAVA_HOME} 
-#                DATADIR=${DATADIR}
+SUB_LIST=       SEARCHUSER=${SEARCHUSER} SEARCHGROUP=${SEARCHGROUP} JAVA_HOME=${JAVA_HOME}
 
 BINS=		data-prepper
 CONFIG_FILES=	data-prepper-config.yaml log4j2-rolling.properties
