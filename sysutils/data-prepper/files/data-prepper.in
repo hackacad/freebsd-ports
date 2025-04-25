@@ -32,21 +32,48 @@ load_rc_config ${name}
 : ${data_prepper_config_dir:=%%PREFIX%%/etc/data-prepper}
 : ${data_prepper_java_home:="%%JAVA_HOME%%"}
 : ${data_prepper_home:="%%DATADIR%%"}
+: ${data_prepper_pidfile:=/var/run/${name}/${name}.pid}
 
 export JAVA_HOME=${data_prepper_java_home}
 required_files="${data_prepper_config}"
-pidfile=/var/run/${name}/${name}.pid
 procname=${data_prepper_home}/bin/data-prepper
+pidfile="${data_prepper_pidfile}"
 command="/usr/sbin/daemon"
-
 command_args="-P ${pidfile} -r -f ${procname}"
 
+status_cmd="data_prepper_status"
 start_precmd="data_prepper_precmd"
+stop_precmd="data_prepper_stop_precmd"
+
+data_prepper_status() {
+    if [ ! -f "$pidfile" ]; then
+        echo "${name} is not running (no pidfile)."
+        return 1
+    fi
+
+    pid=$(cat "$pidfile")
+    if [ -z "$pid" ] || ! kill -0 "$pid" 2>/dev/null; then
+        echo "${name} not running? (stale pidfile: $pidfile)."
+        return 1
+    fi
+
+    echo "${name} is running as pid $pid."
+}
 
 data_prepper_precmd()
 {
     if [ ! -d /var/run/${name} ]; then
-        install -d -o ${data_prepper_user} -g ${data_prepper_group} /var/run/${name}
+	install -d -o ${data_prepper_user} -g ${data_prepper_group} -m 755 $(dirname ${pidfile})    
+    fi
+}
+
+data_prepper_stop_precmd() {
+    if [ -f "$pidfile" ]; then
+        pid=$(cat "$pidfile")
+        if [ -z "$pid" ] || ! kill -0 "$pid" 2>/dev/null; then
+            echo "Removing stale pidfile: $pidfile"
+            rm -f "$pidfile"
+        fi
     fi
 }
 

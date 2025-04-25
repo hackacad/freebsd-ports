@@ -1,0 +1,148 @@
+2025-04-25T07:00:23,450 [main] INFO  org.opensearch.dataprepper.DataPrepperArgumentConfiguration - Command line args: /usr/local/share/data-prepper/pipelines,/usr/local/share/data-prepper/config/data-prepper-config.yaml
+2025-04-25T07:00:24,277 [main] INFO  org.opensearch.dataprepper.pipeline.parser.transformer.DynamicConfigTransformer - No transformation needed
+2025-04-25T07:00:25,208 [main] INFO  org.opensearch.dataprepper.plugins.kafka.extension.KafkaClusterConfigExtension - Applying Kafka Cluster Config Extension.
+2025-04-25T07:00:25,740 [main] INFO  org.opensearch.dataprepper.parser.PipelineTransformer - Building pipeline [entry-pipeline] from provided configuration
+2025-04-25T07:00:25,741 [main] INFO  org.opensearch.dataprepper.parser.PipelineTransformer - Building [file] as source component for the pipeline [entry-pipeline]
+2025-04-25T07:00:25,884 [main] INFO  org.opensearch.dataprepper.parser.PipelineTransformer - Building buffer for the pipeline [entry-pipeline]
+2025-04-25T07:00:25,885 [main] INFO  org.opensearch.dataprepper.parser.PipelineTransformer - Building processors for the pipeline [entry-pipeline]
+2025-04-25T07:00:25,896 [main] INFO  org.opensearch.dataprepper.parser.PipelineTransformer - Building sinks for the pipeline [entry-pipeline]
+2025-04-25T07:00:25,897 [main] INFO  org.opensearch.dataprepper.parser.PipelineTransformer - Building [opensearch] as sink component
+2025-04-25T07:00:25,980 [main] ERROR org.opensearch.dataprepper.validation.LoggingPluginErrorsHandler - 1. entry-pipeline:source:file: caused by: Cannot deserialize value of type `java.lang.String` from Array value (token `JsonToken.START_ARRAY`)
+ at [Source: UNKNOWN; byte offset: #UNKNOWN] (through reference chain: org.opensearch.dataprepper.plugins.source.file.FileSourceConfig["path"]) caused by: Cannot deserialize value of type `java.lang.String` from Array value (token `JsonToken.START_ARRAY`)
+ at [Source: UNKNOWN; byte offset: #UNKNOWN] (through reference chain: org.opensearch.dataprepper.plugins.source.file.FileSourceConfig["path"])
+2. entry-pipeline:buffer:bounded_blocking: caused by: Cannot invoke "org.opensearch.dataprepper.model.source.Source.getDecoder()" because "source" is null
+3. entry-pipeline:processor:grok: caused by: Unrecognized field "fallback_to_default" (class org.opensearch.dataprepper.plugins.processor.grok.GrokProcessorConfig), not marked as ignorable (14 known properties: "timeout_millis", "match", "tags_on_timeout", "patterns_directories", "target_key", "keys_to_overwrite", "tags_on_match_failure", "named_captures_only", "keep_empty_captures", "patterns_files_glob", "performance_metadata", "break_on_match", "pattern_definitions", "grok_when"])
+ at [Source: UNKNOWN; byte offset: #UNKNOWN] (through reference chain: org.opensearch.dataprepper.plugins.processor.grok.GrokProcessorConfig["fallback_to_default"]) caused by: Unrecognized field "fallback_to_default" (class org.opensearch.dataprepper.plugins.processor.grok.GrokProcessorConfig), not marked as ignorable (14 known properties: "timeout_millis", "match", "tags_on_timeout", "patterns_directories", "target_key", "keys_to_overwrite", "tags_on_match_failure", "named_captures_only", "keep_empty_captures", "patterns_files_glob", "performance_metadata", "break_on_match", "pattern_definitions", "grok_when"])
+ at [Source: UNKNOWN; byte offset: #UNKNOWN] (through reference chain: org.opensearch.dataprepper.plugins.processor.grok.GrokProcessorConfig["fallback_to_default"])
+2025-04-25T07:00:25,981 [main] ERROR org.opensearch.dataprepper.parser.PipelineTransformer - Construction of pipeline components failed, skipping building of pipeline [entry-pipeline] and its connected pipelines
+org.opensearch.dataprepper.model.plugin.InvalidPluginConfigurationException: One or more plugins are not configured correctly in the pipeline: entry-pipeline.
+
+	at org.opensearch.dataprepper.parser.PipelineTransformer.buildPipelineFromConfiguration(PipelineTransformer.java:175) ~[data-prepper-core-2.10.2.jar:?]
+	at org.opensearch.dataprepper.parser.PipelineTransformer.transformConfiguration(PipelineTransformer.java:111) ~[data-prepper-core-2.10.2.jar:?]
+	at org.opensearch.dataprepper.DataPrepper.<init>(DataPrepper.java:71) ~[data-prepper-core-2.10.2.jar:2.10.2]
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77) ~[?:?]
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:?]
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500) ~[?:?]
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481) ~[?:?]
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:213) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:117) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:302) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:287) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:209) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:904) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:781) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:532) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:209) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:904) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:781) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:220) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) [spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) [spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:209) [spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) [spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) [spring-context-5.3.39.jar:5.3.39]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:591) [spring-context-5.3.39.jar:5.3.39]
+	at org.opensearch.dataprepper.AbstractContextManager.start(AbstractContextManager.java:59) [data-prepper-core-2.10.2.jar:2.10.2]
+	at org.opensearch.dataprepper.AbstractContextManager.getDataPrepperBean(AbstractContextManager.java:45) [data-prepper-core-2.10.2.jar:2.10.2]
+	at org.opensearch.dataprepper.DataPrepperExecute.main(DataPrepperExecute.java:39) [data-prepper-main-2.10.2.jar:2.10.2]
+2025-04-25T07:00:26,003 [main] WARN  org.springframework.context.support.AbstractApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dataPrepperServer' defined in URL [jar:file:/usr/local/share/data-prepper/lib/data-prepper-core-2.10.2.jar!/org/opensearch/dataprepper/pipeline/server/DataPrepperServer.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'listPipelinesHandler' defined in org.opensearch.dataprepper.pipeline.server.config.DataPrepperServerConfiguration: Unsatisfied dependency expressed through method 'listPipelinesHandler' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataPrepper' defined in URL [jar:file:/usr/local/share/data-prepper/lib/data-prepper-core-2.10.2.jar!/org/opensearch/dataprepper/DataPrepper.class]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.opensearch.dataprepper.DataPrepper]: Constructor threw exception; nested exception is java.lang.RuntimeException: No valid pipeline is available for execution, exiting
+2025-04-25T07:00:53,006 [main] INFO  org.opensearch.dataprepper.DataPrepperArgumentConfiguration - Command line args: /usr/local/share/data-prepper/pipelines,/usr/local/share/data-prepper/config/data-prepper-config.yaml
+2025-04-25T07:00:53,773 [main] INFO  org.opensearch.dataprepper.pipeline.parser.transformer.DynamicConfigTransformer - No transformation needed
+2025-04-25T07:00:54,728 [main] INFO  org.opensearch.dataprepper.plugins.kafka.extension.KafkaClusterConfigExtension - Applying Kafka Cluster Config Extension.
+2025-04-25T07:00:55,211 [main] INFO  org.opensearch.dataprepper.parser.PipelineTransformer - Building pipeline [entry-pipeline] from provided configuration
+2025-04-25T07:00:55,212 [main] INFO  org.opensearch.dataprepper.parser.PipelineTransformer - Building [file] as source component for the pipeline [entry-pipeline]
+2025-04-25T07:00:55,346 [main] INFO  org.opensearch.dataprepper.parser.PipelineTransformer - Building buffer for the pipeline [entry-pipeline]
+2025-04-25T07:00:55,347 [main] INFO  org.opensearch.dataprepper.parser.PipelineTransformer - Building processors for the pipeline [entry-pipeline]
+2025-04-25T07:00:55,357 [main] INFO  org.opensearch.dataprepper.parser.PipelineTransformer - Building sinks for the pipeline [entry-pipeline]
+2025-04-25T07:00:55,358 [main] INFO  org.opensearch.dataprepper.parser.PipelineTransformer - Building [opensearch] as sink component
+2025-04-25T07:00:55,416 [main] ERROR org.opensearch.dataprepper.validation.LoggingPluginErrorsHandler - 1. entry-pipeline:source:file: caused by: Cannot deserialize value of type `java.lang.String` from Array value (token `JsonToken.START_ARRAY`)
+ at [Source: UNKNOWN; byte offset: #UNKNOWN] (through reference chain: org.opensearch.dataprepper.plugins.source.file.FileSourceConfig["path"]) caused by: Cannot deserialize value of type `java.lang.String` from Array value (token `JsonToken.START_ARRAY`)
+ at [Source: UNKNOWN; byte offset: #UNKNOWN] (through reference chain: org.opensearch.dataprepper.plugins.source.file.FileSourceConfig["path"])
+2. entry-pipeline:buffer:bounded_blocking: caused by: Cannot invoke "org.opensearch.dataprepper.model.source.Source.getDecoder()" because "source" is null
+3. entry-pipeline:processor:grok: caused by: Unrecognized field "fallback_to_default" (class org.opensearch.dataprepper.plugins.processor.grok.GrokProcessorConfig), not marked as ignorable (14 known properties: "timeout_millis", "match", "tags_on_timeout", "patterns_directories", "target_key", "keys_to_overwrite", "tags_on_match_failure", "named_captures_only", "keep_empty_captures", "patterns_files_glob", "performance_metadata", "break_on_match", "pattern_definitions", "grok_when"])
+ at [Source: UNKNOWN; byte offset: #UNKNOWN] (through reference chain: org.opensearch.dataprepper.plugins.processor.grok.GrokProcessorConfig["fallback_to_default"]) caused by: Unrecognized field "fallback_to_default" (class org.opensearch.dataprepper.plugins.processor.grok.GrokProcessorConfig), not marked as ignorable (14 known properties: "timeout_millis", "match", "tags_on_timeout", "patterns_directories", "target_key", "keys_to_overwrite", "tags_on_match_failure", "named_captures_only", "keep_empty_captures", "patterns_files_glob", "performance_metadata", "break_on_match", "pattern_definitions", "grok_when"])
+ at [Source: UNKNOWN; byte offset: #UNKNOWN] (through reference chain: org.opensearch.dataprepper.plugins.processor.grok.GrokProcessorConfig["fallback_to_default"])
+2025-04-25T07:00:55,417 [main] ERROR org.opensearch.dataprepper.parser.PipelineTransformer - Construction of pipeline components failed, skipping building of pipeline [entry-pipeline] and its connected pipelines
+org.opensearch.dataprepper.model.plugin.InvalidPluginConfigurationException: One or more plugins are not configured correctly in the pipeline: entry-pipeline.
+
+	at org.opensearch.dataprepper.parser.PipelineTransformer.buildPipelineFromConfiguration(PipelineTransformer.java:175) ~[data-prepper-core-2.10.2.jar:?]
+	at org.opensearch.dataprepper.parser.PipelineTransformer.transformConfiguration(PipelineTransformer.java:111) ~[data-prepper-core-2.10.2.jar:?]
+	at org.opensearch.dataprepper.DataPrepper.<init>(DataPrepper.java:71) ~[data-prepper-core-2.10.2.jar:2.10.2]
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77) ~[?:?]
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:?]
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500) ~[?:?]
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481) ~[?:?]
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:213) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:117) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:302) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:287) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:209) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:904) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:781) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:532) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:209) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:904) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:781) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:220) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336) ~[spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) [spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) [spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:209) [spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) [spring-beans-5.3.39.jar:5.3.39]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) [spring-context-5.3.39.jar:5.3.39]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:591) [spring-context-5.3.39.jar:5.3.39]
+	at org.opensearch.dataprepper.AbstractContextManager.start(AbstractContextManager.java:59) [data-prepper-core-2.10.2.jar:2.10.2]
+	at org.opensearch.dataprepper.AbstractContextManager.getDataPrepperBean(AbstractContextManager.java:45) [data-prepper-core-2.10.2.jar:2.10.2]
+	at org.opensearch.dataprepper.DataPrepperExecute.main(DataPrepperExecute.java:39) [data-prepper-main-2.10.2.jar:2.10.2]
+2025-04-25T07:00:55,434 [main] WARN  org.springframework.context.support.AbstractApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'dataPrepperServer' defined in URL [jar:file:/usr/local/share/data-prepper/lib/data-prepper-core-2.10.2.jar!/org/opensearch/dataprepper/pipeline/server/DataPrepperServer.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'listPipelinesHandler' defined in org.opensearch.dataprepper.pipeline.server.config.DataPrepperServerConfiguration: Unsatisfied dependency expressed through method 'listPipelinesHandler' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataPrepper' defined in URL [jar:file:/usr/local/share/data-prepper/lib/data-prepper-core-2.10.2.jar!/org/opensearch/dataprepper/DataPrepper.class]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.opensearch.dataprepper.DataPrepper]: Constructor threw exception; nested exception is java.lang.RuntimeException: No valid pipeline is available for execution, exiting
