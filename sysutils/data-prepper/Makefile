@@ -14,14 +14,18 @@ LICENSE=	APACHE20
 RUN_DEPENDS=	bash>0:shells/bash
 
 USES=		cpe shebangfix java
+USE_JAVA=       yes
 JAVA_VERSION=	17+
 USE_RC_SUBR=	${PORTNAME}
 
 SHEBANG_FILES=	bin/data-prepper
 
 NO_BUILD=	yes
-SUB_FILES=	data-prepper
-SUB_LIST=	SEARCHUSER=${SEARCHUSER} SEARCHGROUP=${SEARCHGROUP} JAVA_HOME=${JAVA_HOME}
+SUB_FILES=      data-prepper pkg-message
+SUB_LIST=       SEARCHUSER=${SEARCHUSER} \
+                SEARCHGROUP=${SEARCHGROUP} \
+                JAVA_HOME=${JAVA_HOME} 
+#                DATADIR=${DATADIR}
 
 BINS=		data-prepper
 CONFIG_FILES=	data-prepper-config.yaml log4j2-rolling.properties
